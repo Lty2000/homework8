@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*页头部分*/
+        .title {
+            position: relative;
+            width: 1500px;
+            height: 60px;
+            background: rgb(26, 25, 25);
+        }
+
+        .title1 {
+            float: left;
+            width: 800px;
+            color: white;
+            line-height: 60px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .title1 img {
+            margin-top: 5px;
+        }
+
+        .title div:nth-child(n+1) :hover {
+            color: orange;
+        }
+
+        .title2 {
+            float: left;
+            width: 300px;
+            color: rgb(201, 187, 187);
+            font-size: 80%;
+            line-height: 60px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .littlelogo {
+            width: 24px;
+            height: 24px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .littlelogo img {
+            margin-top: -24px;
+            margin-left: -225px;
+            ;
+        }
+
+        .title3 {
+            float: left;
+            width: 400px;
+            color: white;
+            font-size: 80%;
+            line-height: 60px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .title3 img {
+            float: right;
+            margin-top: 20px;
+        }
+
+
+        /*歌词部分*/
+        .words {
+            width: 600px;
+            height: 600px;
+            float: left;
+            margin-left: 200px;
+        }
+
+        .songname {
+            width: 600px;
+            height: 100px;
+            font-size: 30px;
+            line-height: 80px;
+            text-align: center;
+        }
+
+        .message {
+            width: 600px;
+            height: 50px;
+        }
+
+        .mes1 {
+            width: 400px;
+            height: 25px;
+            display: flex;
+            justify-content: space-around;
+            margin-left: 100px;
+            line-height: 25px;
+        }
+
+        .lyric {
+            width: 500px;
+            height: 400px;
+            margin-left: 50px;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        ol {
+            text-align: center;
+        }
+
+        li {
+            height: 30px;
+            list-style: none;
+        }
+
+        /*音乐图片部分*/
+        .bigimg {
+            height: 350px;
+            width: 640px;
+            margin-left: 802px;
+            margin-top: 18px;
+
+        }
+
+        .image {
+            width: 300px;
+            height: 300px;
+            margin-top: 5px;
+            margin-left: 5px;
+            border-radius: 50%;
+            background-image: url(./image/7.jpg);
+            background-size: cover;
+        }
+
+        .waihuan {
+            position: absolute;
+            width: 310px;
+            height: 310px;
+            margin-left: 150px;
+            border: 1px solid grey;
+            border-radius: 50%;
+        }
+        .neihuan{
+            position: absolute;
+            width:50px;
+            height: 50px;
+            margin-left: 130px;
+            margin-top: -170px;
+            border:1px solid black;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.5;
+        }
+        .neihuan2{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            margin-top: 13px;
+            margin-left:13px;
+            border:1px solid black;
+            border-radius: 50%;
+            background:white;
+            opacity: 0.5;
+        }
+
+        @keyframes xz {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .image {
+            animation-name: xz;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            /*动画的速度曲线*/
+            animation-iteration-count: infinite;
+            /*动画执行次数，可以是数字，可以是infinite*/
+        }
+
+
+        /*音乐播放部分*/
+
+        /*暂停播放键*/
+        #player {
+            width: 640px;
+            height: 100px;
+            margin-left: 802px;
+        }
+
+        .play {
+            width: 45px;
+            height: 40px;
+            margin-top: 25px;
+            margin-left: 50px;
+            background-image: url(./image/5.jpg);
+            background-position: -108px 0px;
+        }
+
+        .play:hover {
+            background-position: -160px 0px;
+        }
+
+        /*进度条*/
+        .playerMid {
+            margin-left: 110px;
+            margin-top: -30px;
+            width: 400px;
+            height: 60px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .playerMid #prograssBar {
+            float: left;
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: url(./image/prograss.png);
+            margin: 10px 10px 0 0;
+            display: inline;
+        }
+
+        .playerMid .prograssBar {
+            /*黄色进度条*/
+            width: 0px;
+            height: 4px;
+            background: #ffcd2d;
+        }
+
+        .playerMid #wp_bufBar {
+            width: 0px;
+            height: 4px;
+            background: url(./image/prograss.png);
+        }
+
+        .playerMid #wp_processBtn {
+            width: 10px;
+            height: 10px;
+            background: url(./image/icon.png) 0 -128px;
+            position: absolute;
+            top: -3px;
+        }
+
+        .playerRight {
+            position: relative;
+            margin-left: 530px;
+            margin-top: -75px;
+        }
+
+        #voice {
+            width: 24px;
+            height: 16px;
+            position: relative;
+            margin-left: 580px;
+            margin-top: -35px;
+            background-color: rgb(19, 18, 18);
+            border-radius: 8px;
+            background-image: url(./image/1.png);
+            background-position: -260px -112px;
+        }
+
+        /*下载歌曲部分*/
+        .download {
+            width: 200px;
+            height: 44px;
+            background-image: url(./image/5.jpg);
+            background-position: 0px -44px;
+            margin-left: 1020px;
+        }
+
+        .download_logo {
+            width: 19px;
+            height: 16px;
+            background-image: url(./image/5.jpg);
+            background-position: 0px 0px;
+            position: absolute;
+            margin-top: 15px;
+            margin-left: 40px;
+        }
+
+        .download p {
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 65px;
+        }
+
+
+        /*好友演唱部分*/
+        .headshots {
+            width: 60px;
+            height: 60px;
+            margin-left: 900px;
+            margin-top: 20px;
+            border-radius: 50%;
+            background-image: url(./image//6.jpg);
+            background-size: cover;
+            background-position: -10px;
+        }
+
+        .talk {
+            width: 300px;
+            height: 80px;
+            position: absolute;
+            margin-left: 1000px;
+            margin-top: -70px;
+            border-radius: 10px;
+            background: rgb(214, 211, 211);
+            color: grey;
+            line-height: 40px;
+        }
+
+        .triangle {
+            width: 20px;
+            height: 20px;
+
+            transform: rotate(45deg);
+            position: absolute;
+            margin-top: 30px;
+            margin-left: -10px;
+            background: rgb(214, 211, 211)
+        }
+
+        .headset {
+            width: 25px;
+            height: 25px;
+            margin-left: 20px;
+            background-image: url(./image/1.png);
+            background-position: -305px -169px;
+
+        }
+
+        .song_name {
+            width: 230px;
+            position: absolute;
+            margin-left: 50px;
+            margin-top: -35px;
+            color: red;
+        }
+
+        .song_name a {
+            float: right;
+            text-decoration: none;
+            color: blue;
+        }
+
+
+        /*评论区*/
+        .comments_section {
+            width: 700px;
+            height: 900px;
+            margin: 50px auto;
+        }
+
+        .headshots2 {
+            width: 60px;
+            height: 60px;
+            margin-left: 10px;
+        }
+
+        #profile {
+            width: 60px;
+            height: 60px;
+        }
+
+        #share_comment {
+            width: 600px;
+            height: 200px;
+            border: 1px solid rgb(224, 219, 219);
+            margin-left: 90px;
+            margin-top: -60px;
+            resize: none;
+        }
+
+        .smile {
+            width: 20px;
+            height: 20px;
+            margin-left: 90px
+        }
+
+        .bottom {
+            position: relative;
+            height: 20px;
+            width: 585px;
+            margin-left: 110px;
+            margin-top: -22px;
+        }
+
+        #button {
+            width: 50px;
+            height: 20px;
+            background: orange;
+            border: none;
+            float: right;
+            color: black;
+        }
+
+        #wordnum {
+            float: right;
+        }
+
+        #comment_box {
+            height: 120px;
+            margin: 20px;
+            padding: 3px;
+            border: 1px solid #D0D0D0;
+        }
+
+        .comment_box_img {
+            float: left;
+        }
+
+        .shot1 {
+            width: 60px;
+            height: 60px;
+        }
+
+        .comment_box_top {
+            margin-left: 70px;
+        }
+
+
+        .id_name {
+            float: left;
+            color: orange;
+        }
+
+        .index_share {
+            float: right;
+            margin-right: 10px;
+        }
+
+        .comment_box_content {
+            margin-top: 30px;
+            margin-left: 70px;
+            position: absolute;
+        }
+
+        .comment_box_buttom {
+            margin-left: 70px;
+            margin-top: 100px;
+        }
+
+        .now_time {
+            font-size: 12px;
+            float: left;
+        }
+
+        .index_reply {
+            float: right;
+            margin-right: 10px;
+        }
+
+        img[src=" "],
+        img:not([src]) {
+            opacity: 0;
+        }
+
+        /*分页*/
+        ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.pagination li {
+            display: inline;
+        }
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 50%;
+        }
+
+        ul.pagination li a.active {
+            background-color: orange;
+            color: white;
+        }
+
+        ul.pagination li a:hover:not(.active) {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <div class="title1">
+            <div>
+                <img src="./image/3.jpg">
+            </div>
+            <div>首页</div>
+            <div>榜单</div>
+            <div>歌手</div>
+            <div>下载酷我客户端</div>
+        </div>
+        <div class="title2">
+            <div class="littlelogo"><img src="./image/1.png"></div>
+            <div>美女秀</div>
+            <div class="littlelogo"><img src="./image/1.png"></div>
+            <div>酷我耳机</div>
+            <div class="littlelogo"><img src="./image/1.png"></div>
+            <div>VIP会员</div>
+            <div class="littlelogo"><img src="./image/1.png"></div>
+            <div>i听</div>
+        </div>
+        <div class="title3">
+            <div>更多服务</div>
+            <div>登录</div>
+            <div>^</div>
+            <div><img src="./image/6.png"></div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="words">
+            <div class="songname">喜羊羊</div>
+            <div class="message">
+                <div class="mes1">
+                    <div style="color: grey;">专辑：</div>
+                    <div style="color: orange;">儿歌大全</div>
+                    <div style="color: grey;">歌手：</div>
+                    <div style="color: orange;">华语群星</div>
+                    <div style="color: grey;">分享</div>
+                    <div style="color: orange;"><img src="./image/2.jpg">评论</div>
+                </div>
+                <div style="text-align: center; font-size: 5px;">上传时间：2015-10-02 歌曲来源：民大相思湖网球社</div>
+                <hr>
+            </div>
+            <div class="lyric">
+                <ol>
+                    <li>喜羊羊美羊羊懒羊羊沸羊羊</li>
+                    <li>慢羊羊软绵绵红太狼灰太狼</li>
+                    <li>别看我只是一只羊</li>
+                    <li>绿草也为我变的更香</li>
+                    <li>天空因为我变的更蓝</li>
+                    <li>白云也为我变的柔软</li>
+                    <li>别看我只是一只羊</li>
+                    <li>羊儿的聪明难以想像</li>
+                    <li>天再高心情一样奔放</li>
+                    <li>每天都追赶太阳..</li>
+                    <li style="color: orange;">有什么难题去牵绊我都不会去心伤</li>
+                    <li>有什么危险在我面前也不会去慌乱</li>
+                    <li>就算有狼群把我追捕也当做游戏一场</li>
+                    <li>在什么时间都爱开心笑容都会飞翔</li>
+                    <li>就算会摔倒站得起来永远不会沮丧</li>
+                    <li>在所有天气拥有叫人大笑的力量</li>
+                    <li>虽然我只是羊… …</li>
+
+                </ol>
+            </div>
+        </div>
+        <div class="bigimg">
+            <div class="waihuan">
+                <div class="image" z-index:1></div>
+                <div class="neihuan" z-index:2><div class="neihuan2"></div></div>
+            </div>
+        </div>
+        <div id="player">
+            <audio autoplay="autoplay" id="mymusic">
+                <source src="./image/2.mp3" type="audio/mp3">
+            </audio>
+            <div class="play" id="wp_playBtn"></div>
+
+            <div class="playerMid">
+                <div id="prograssBar">
+                    <div id="wp_bufBar">
+                        <div class="prograssBar" id="wp_processBar"></div>
+                        <a href="##" class="schedule_btn" id="wp_processBtn" style="left: 0;"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="playerRight">
+                <p id="wp_playTime" class="opacity">00:00</p>
+            </div>
+            <div id="voice"></div>
+        </div>
+        <div class="download">
+            <div class="download_logo"></div>
+            <p>免费下载这首歌</p>
+        </div>
+        <div class="headshots"></div>
+        <div class="talk">
+            <div class="triangle"></div>
+            李天宇——H5 1班
+            <div class="headset"></div>
+            <div class="song_name">别看我只是一只羊 <a href="">>></a></div>
+
+        </div>
+    </div>
+    <div class="comments_section">
+        <p style="margin-left: 20px;">评论 1703条评论</p>
+        <hr>
+        <div class="headshots2"><img src="./image/6.jpg" id="profile"></div>
+        <textarea cols="40" rows="8" id="share_comment" placeholder="分享你的音乐见解"></textarea>
+        <div class="smile">☺</div>
+        <div class="bottom">
+            <input id="button" type="button" value="提交">
+            <div id="wordnum">已输入<span id="num">0</span>字</div>
+        </div>
+        <p style="margin-left: 20px; margin-top: 50px;">精彩评论</p>
+        <hr>
+        <div id="comments_history">
+        </div>
+        <div id="page">
+            <!-- <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a class="active" href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">»</a></li>
+        </ul> -->
+        </div>
+    </div>
+
+</body>
+<script>
+    /*音乐板块*/
+    var mymusic = document.getElementById("mymusic");
+    var start = document.getElementById("wp_playBtn");
+    var tag = true;
+    start.onclick = function () {    /*播放暂停按钮*/
+        if (tag) {
+            mymusic.play();
+            start.style.backgroundPosition = "-205px 0px";
+            start.onmouseover = function () {
+                start.style.backgroundPosition = "-205px -48px";
+            }
+            tag = false;
+        } else {
+            mymusic.pause();
+            start.style.backgroundPosition = "-108px 0px";
+            start.onmouseover = function () {
+                start.style.backgroundPosition = "-160px 0px";
+            }
+            tag = true;
+        }
+    }
+
+    /*进度条显示*/
+    var prograssBar = document.getElementById("prograssBar");
+    var processList = document.getElementsByClassName("prograssBar")[0];
+    var wp_processBtn = document.getElementById("wp_processBtn");
+    setInterval(function () {
+        var duration = mymusic.duration;
+        var prograssBarLength = prograssBar.offsetWidth;
+
+        var processBtnLeft = prograssBarLength * (mymusic.currentTime / duration);
+        wp_processBtn.style.left = processBtnLeft + "px";
+        processList.style.width = processBtnLeft + "px";
+    }, 1000)
+
+    /*时间显示*/
+    function timeFormat(number) {
+        var minute = parseInt(number / 60);
+        var second = parseInt(number % 60);
+        minute = minute >= 10 ? minute : "0" + minute;
+        second = second >= 10 ? second : "0" + second;
+        return minute + ":" + second;
+    }
+
+    var musictime = document.getElementById("wp_playTime");
+    var timer = setInterval(function () {
+        var musicLength = timeFormat(mymusic.currentTime);
+        musictime.innerText = musicLength;
+    }, 1000);
+
+    /*静音功能*/
+    var voice = document.getElementById("voice");
+    var tag2 = true;
+    voice.onclick = function () {
+        if (tag2) {
+            mymusic.muted = true;
+            voice.style.backgroundPosition = "-306px -128px";
+            tag2 = false;
+        } else {
+            mymusic.muted = false;
+            voice.style.backgroundPosition = "-260px -112px"
+            tag2 = true;
+        }
+    }
+
+
+
+    /*评论区板块*/
+    /*字数监控*/
+    let commentsList = null;
+    commentsList = new Array();
+    var share_comment = document.getElementById("share_comment");
+    var num = document.getElementById("num");
+    setInterval(function () {
+        num.innerHTML = share_comment.value.length;
+    }, 100)
+
+
+    var commentnum = 0;
+    const pageSize = 3;
+    let totalPage = 0;
+
+
+    let getTotal = function () {
+        if (localStorage.getItem("commentsListCount")) {
+            return parseInt(localStorage.getItem("commentsListCount"));
+        }
+        else
+            return 0;
+    }
+    totalPage = getTotal();
+    let setData = function (data) {
+        if (!window.localStorage) {
+            alert("提交失败")
+            return;
+        }
+        let commentsList = [];
+        if (localStorage.getItem("commentsList")) {
+            commentsList = JSON.parse(localStorage.getItem("commentsList"));
+        }
+       commentsList.push(data)
+        localStorage.setItem("commentsList", JSON.stringify(commentsList));
+        localStorage.setItem("commentsListCount", commentsList.length);
+    }
+    let getData = function (pageIndex, pageSize) {
+        let commentsList = [];
+        if (localStorage.getItem("commentsList")) {
+            commentsList = JSON.parse(localStorage.getItem("commentsList"));
+        }
+        let start = (pageIndex - 1) * pageSize;
+        if (start < 0) {
+            start = 0
+        }
+        commentsList = commentsList.sort((a, b) => b.timestamp - a.timestamp)
+        return commentsList.splice(start, pageSize);
+    }
+    let reader = function (arr) {
+        let html = "";
+        for (let i = 0; i < arr.length; i++) {
+            let item = arr[i];
+            html += `<div id="comment_box"><div class="comment_box_img"><img class="shot1" src="${item.url}"></div><div class="comment_box_top"><div class="id_name" style="color: orange;">飞翔的企鹅</div><div class="index_share">分享</div></div><div class="comment_box_content">${item.comment}</div><div class="comment_box_buttom"><div class="now_time">${item.timer}</div><div class="index_reply">删除 ${item.nicenum}👍 回复</div></div></div>`
+        }
+        document.getElementById("comments_history").innerHTML = html;
+        let total=getTotal()
+        console.log(total)
+        document.getElementById("page").innerHTML = pageHelper(1, pageSize,total)
+    }
+    let showPage = function (pageIndex) {
+        let arr = getData(pageIndex, pageSize);
+        reader(arr);
+    }
+
+    var reg = document.getElementById("button");
+    var profile = document.getElementById("profile");
+    var share_comment = document.getElementById("share_comment");
+
+    window.onload = function () {
+        if (window.localStorage) {
+            reg.onclick = function () {
+                /*当前时间及时间格式*/
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth() + 1;
+                var day = now.getDate();
+                var hour = now.getHours();
+                var minute = now.getMinutes();
+                var second = now.getSeconds();
+                if (month < 10) month = "0" + month;
+                if (day < 10) day = "0" + day;
+                if (hour < 10) hour = "0" + hour;
+                if (minute < 10) minute = "0" + minute;
+                if (second < 10) second = "0" + second;
+                var time = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+
+                /*点赞量*/
+                var nice_num = parseInt(1000*Math.random());
+
+                if (share_comment.value == "") {
+                    alert("评论区内容不可为空")
+                    return false;
+                }
+                var date = {
+                    comment: share_comment.value,
+                    timer: time,
+                    url: profile.src,
+                    nicenum:nice_num,
+                    timestamp: now.getTime()
+                }
+                setData(date);
+                showPage(1);
+                share_comment.value="";
+            }
+        } else {
+            alert("当前浏览器不支持本地存储")
+        }
+    }
+
+
+    var pageHelper = function (pageindex, pagesize, total) {
+        const totalPage = Math.floor((total + pagesize - 1) / pagesize);
+        let html = '<ul class="pagination">';
+        if (pageindex > 1) {
+            html += `<li><a href="javascript:goPage(1)">«</a></li>`;
+        }
+        let start = 1;
+        let end = totalPage;
+        if (totalPage > 7) {
+            start = pageindex - 3;
+            end = pageindex + 3;
+        }
+        if (start <= 0) {
+            start = 1;
+        }
+        if (end > totalPage) {
+            end = totalPage;
+        }
+        for (let i = start; i <= end; i++) {
+            let className = pageindex == i ? "active" : "";
+            if (pageindex == i)
+                html += `<li><a href="javascript:;" class="${className}">${i}</a></li>`;
+            else
+                html += `<li><a href="javascript:goPage(${i})" class="${className}">${i}</a></li>`;
+        }
+        if (end < totalPage) {
+            html += `<li><a href="javascript:goPage(${totalPage})">»</a></li>`;
+        }
+        html += "</ul>";
+        return html;
+    }
+    var goPage = function (page) {
+        showPage(page)
+        document.getElementById("page").innerHTML = pageHelper(page, pageSize, getTotal())
+    }
+
+    showPage(1)
+
+
+</script>
+
+</html>
